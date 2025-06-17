@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IqraSulsel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #50b3a2;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        .login-container {
+            margin: 50px auto;
+            width: 300px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background: #50b3a2;
+            border: 0;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .dashboard {
+            margin: 50px auto;
+            width: 80%;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard h2 {
+            margin-bottom: 20px;
+        }
+        .dashboard .surah-list {
+            list-style: none;
+            padding: 0;
+        }
+        .dashboard .surah-list li {
+            padding: 10px;
+            background: #f4f4f4;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .dashboard .ayat-container {
+            margin-top: 20px;
+        }
+        .dashboard .ayat-container p {
+            padding: 10px;
+            background: #f4f4f4;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .logout {
+            display: block;
+            margin: 20px 0;
+            padding: 10px;
+            background: #e8491d;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>IqraSulsel</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showLogin('siswa')">Login Siswa</a></li>
+                    <li><a href="#" onclick="showLogin('guru')">Login Guru</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="login-siswa" class="login-container" style="display:none;">
+        <h2>Login Siswa</h2>
+        <input type="text" id="siswa-username" placeholder="Username">
+        <input type="password" id="siswa-password" placeholder="Password">
+        <input type="submit" value="Login" onclick="login('siswa')">
+    </div>
+
+    <div id="login-guru" class="login-container" style="display:none;">
+        <h2>Login Guru</h2>
+        <input type="text" id="guru-username" placeholder="Username">
+        <input type="password" id="guru-password" placeholder="Password">
+        <input type="submit" value="Login" onclick="login('guru')">
+    </div>
+
+    <div id="dashboard-siswa" class="dashboard" style="display:none;">
+        <h2>Dashboard Siswa</h2>
+        <ul class="surah-list">
+            <li onclick="showAyat('Al-Fatihah')">Al-Fatihah</li>
+            <li onclick="showAyat('Al-Ikhlas')">Al-Ikhlas</li>
+            <li onclick="showAyat('Al-Falaq')">Al-Falaq</li>
+            <li onclick="showAyat('An-Nas')">An-Nas</li>
+        </ul>
+        <div class="ayat-container" id="ayat-container"></div>
+        <a href="#" class="logout" onclick="logout()">Logout</a>
+    </div>
+
+    <div id="dashboard-guru" class="dashboard" style="display:none;">
+        <h2>Dashboard Guru</h2>
+        <p>Daftar Siswa:</p>
+        <ul class="surah-list">
+            <li>Siswa 1 - Progress: 50%</li>
+            <li>Siswa 2 - Progress: 70%</li>
+            <li>Siswa 3 - Progress: 30%</li>
+        </ul>
+        <a href="#" class="logout" onclick="logout()">Logout</a>
+    </div>
+
+    <script>
+        function showLogin(role) {
+            document.getElementById('login-siswa').style.display = 'none';
+            document.getElementById('login-guru').style.display = 'none';
+            document.getElementById('dashboard-siswa').style.display = 'none';
+            document.getElementById('dashboard-guru').style.display = 'none';
+
+            if (role === 'siswa') {
+                document.getElementById('login-siswa').style.display = 'block';
+            } else if (role === 'guru') {
+                document.getElementById('login-guru').style.display = 'block';
+            }
+        }
+
+        function login(role) {
+            if (role === 'siswa') {
+                var username = document.getElementById('siswa-username').value;
+                var password = document.getElementById('siswa-password').value;
+                if (username === 'siswa' && password === '1234') {
+                    document.getElementById('login-siswa').style.display = 'none';
+                    document.getElementById('dashboard-siswa').style.display = 'block';
+                } else {
+                    alert('Username atau password salah!');
+                }
+            } else if (role === 'guru') {
+                var username = document.getElementById('guru-username').value;
+                var password = document.getElementById('guru-password').value;
+                if (username === 'guru' && password === '1234') {
+                    document.getElementById('login-guru').style.display = 'none';
+                    document.getElementById('dashboard-guru').style.display = 'block';
+                } else {
+                    alert('Username atau password salah!');
+                }
+            }
+        }
+
+        function showAyat(surah) {
+            var ayatContainer = document.getElementById('ayat-container');
+            ayatContainer.innerHTML = '';
+
+            if (surah === 'Al-Fatihah') {
+                ayatContainer.innerHTML += '<p>1. Bismillahirrahmanirrahim</p>';
+                ayatContainer.innerHTML += '<p>2. Alhamdulillahi rabbil 'alamin</p>';
+                ayatContainer.innerHTML += '<p>3. Arrahmanirrahim</p>';
+                ayatContainer.innerHTML += '<p>4. Maliki yaumiddin</p>';
+                ayatContainer.innerHTML += '<p>5. Iyyaka na'budu wa iyyaka nasta'in</p>';
+                ayatContainer.innerHTML += '<p>6. Ihdinas siratal mustaqim</p>';
+                ayatContainer.innerHTML += '<p>7. Siratal ladhina an'amta 'alaihim ghairil maghdubi 'alaihim waladhallin</p>';
+            } else if (surah === 'Al-Ikhlas') {
+                ayatContainer.innerHTML += '<p>1. Qul huwallahu ahad</p>';
+                ayatContainer.innerHTML += '<p>2. Allahus samad</p>';
+                ayatContainer.innerHTML += '<p>3. Lam yalid wa lam yulad</p>';
+                ayatContainer.innerHTML += '<p>4. Wa lam yakun lahu kufuwan ahad</p>';
+            } else if (surah === 'Al-Falaq') {
+                ayatContainer.innerHTML += '<p>1. Qul a'udzu birabbil falaq</p>';
+                ayatContainer.innerHTML += '<p>2. Min sharri ma khalaq</p>';
+                ayatContainer.innerHTML += '<p>3. Wa min sharri ghasiqin idza waqab</p>';
+                ayatContainer.innerHTML += '<p>4. Wa min sharri naffathati fil 'uqad</p>';
+                ayatContainer.innerHTML += '<p>5. Wa min sharri hasidin idza hasad</p>';
+            } else if (surah === 'An-Nas') {
+                ayatContainer.innerHTML += '<p>1. Qul a'udzu birabbin nas</p>';
+                ayatContainer.innerHTML += '<p>2. Malikin nas</p>';
+                ayatContainer.innerHTML += '<p>3. Ilahin nas</p>';
+                ayatContainer.innerHTML += '<p>4. Min sharri waswasil khannas</p>';
+                ayatContainer.innerHTML += '<p>5. Alladhi yuwaswisu fi sudurin nas</p>';
+                ayatContainer.innerHTML += '<p>6. Minal jinnati wan nas</p>';
+            }
+        }
+
+        function logout() {
+            document.getElementById('login-siswa').style.display = 'none';
+            document.getElementById('login-guru').style.display = 'none';
+            document.getElementById('dashboard-siswa').style.display = 'none';
+            document.getElementById('dashboard-guru').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
