@@ -1,42 +1,45 @@
-<<<<<<< HEAD
+# 📖 Iqra Sulsel
 
-=======
->>>>>>> bf20e90af1c88dbe509ba2b186065d47f355f6d6
-# IqraSulsel
+**Iqra Sulsel** adalah aplikasi berbasis web untuk memantau bacaan dan hafalan Al-Qur'an siswa di Sulawesi Selatan.  
+Aplikasi ini memungkinkan siswa membaca surah, mencatat durasi, dan mengirimkan riwayat bacaan ke Firebase.
 
-IqraSulsel adalah aplikasi web sederhana untuk mendukung literasi dan hafalan Al-Qur’an bagi siswa dan guru di Sulawesi Selatan.
+## 🎯 Fitur Utama
+- 📚 Membaca Al-Qur'an langsung dari API eQuran.id
+- ⏱️ Timer otomatis saat membaca
+- 📌 Riwayat bacaan disimpan ke Firebase
+- 🧠 Latihan hafalan dengan input audio
+- 👨‍🏫 Monitoring oleh guru
 
-<<<<<<< HEAD
-## Tujuan Aplikasi
-Aplikasi ini bertujuan untuk membantu siswa dalam membaca dan menghafal Al-Qur’an, serta memberikan guru alat untuk memantau perkembangan siswa secara efektif.
-
-=======
->>>>>>> bf20e90af1c88dbe509ba2b186065d47f355f6d6
-## Fitur Utama
-- Login untuk siswa dan guru
-- Dashboard masing-masing peran
-- Tampilan interaktif membaca Al-Qur’an
-- Navigasi antar halaman dan logout
-
-<<<<<<< HEAD
-## Teknologi yang Digunakan
+## 🚀 Teknologi
 - HTML, CSS, JavaScript
-- GitHub untuk version control
+- Firebase Auth & Firestore
+- eQuran API (https://equran.id)
+- GitHub Pages (hosting statis)
 
-## Cara Menjalankan Aplikasi
-1. Unduh file `IqraSulsel.html`
-2. Buka di browser (Chrome, Firefox, Edge)
-3. Login sebagai siswa atau guru
+## 🔗 Demo
+Akses aplikasi secara online:  
+👉 [https://username.github.io/iqra-sulsel/](https://username.github.io/iqra-sulsel/) *(ganti `username` dengan username GitHub kamu)*
 
-## Informasi Tambahan
-Proyek ini dikembangkan oleh Adha Edies Wulandari dari SMAN 3 Bulukumba. Aplikasi ini mendukung program literasi Al-Qur’an yang religius dari pemerintah Sulawesi Selatan.
-=======
-## Teknologi
-- HTML, CSS, JavaScript
-- GitHub untuk version control
+## 📂 Struktur Folder
+iqra-sulsel/
+│
+├── index.html
+├── dashboard.html
+├── baca.html
+├── hafalan.html
+├── css/
+│ └── style.css
+├── js/
+│ ├── baca.js
+│ ├── hafalan.js
+│ └── firebase.js
+└── assets/
 
-## Cara Menjalankan
-1. Unduh file `IqraSulsel.html`
-2. Buka di browser (Chrome, Firefox, Edge)
-3. Login sebagai siswa atau guru
->>>>>>> bf20e90af1c88dbe509ba2b186065d47f355f6d6
+yaml
+Copy
+Edit
+
+## 🙏 Kontribusi
+Proyek ini masih dalam pengembangan awal. Kontribusi terbuka, khususnya dalam pengembangan fitur guru dan dashboard pelacakan.
+
+---

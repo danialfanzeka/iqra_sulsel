@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iqra Sulsel - Dashboard Guru</title>
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .button {
+      background-color: #009578;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #007a63;
+    }
+    .export-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header style="text-align: center; margin-bottom: 20px;">
+      <img src="assets/logo.png" alt="Logo Iqra Sulsel" style="max-width: 100px;" />
+      <h1>Iqra Sulsel</h1>
+      <p style="margin-top: -10px;">Dashboard Guru - Monitoring Progres Siswa</p>
+    </header>
+
+    <section style="margin-bottom: 40px;">
+      <h3 style="text-align: center; color: #009578;">📖 Riwayat Bacaan Siswa</h3>
+      <div style="overflow-x:auto;">
+        <table id="bacaan-table">
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Surah</th>
+              <th>Jumlah Ayat</th>
+              <th>Durasi</th>
+              <th>Waktu</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 40px;">
+      <h3 style="text-align: center; color: #009578;">🧠 Hafalan Siswa</h3>
+      <div style="overflow-x:auto;">
+        <table id="hafalan-table">
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Surah</th>
+              <th>Jumlah Ayat Hafal</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="export-buttons">
+      <button class="button" onclick="exportTable('bacaan-table', 'riwayat_bacaan.xlsx')">📥 Download Bacaan</button>
+      <button class="button" onclick="exportTable('hafalan-table', 'hafalan_siswa.xlsx')">📥 Download Hafalan</button>
+    </div>
+
+    <div style="text-align: center;">
+      <button id="logout-btn" class="button" style="margin-top: 30px;">🚪 Logout</button>
+    </div>
+  </div>
+
+  <!-- Script utama -->
+  <script type="module" src="js/guru.js"></script>
+
+  <!-- SheetJS untuk ekspor Excel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script>
+    function exportTable(tableId, fileName) {
+      const table = document.getElementById(tableId);
+      const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+      XLSX.writeFile(wb, fileName);
+    }
+  </script>
+
+  <!-- Script Logout -->
+  <script type="module">
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { app } from './js/firebase.js'; // pastikan 'firebase.js' mengekspor `app`
+
+    const auth = getAuth(app);
+
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      signOut(auth)
+        .then(() => {
+          alert("Anda berhasil logout.");
+          window.location.href = "index.html"; // arahkan ke halaman login
+        })
+        .catch((error) => {
+          console.error("Gagal logout:", error);
+          alert("Terjadi kesalahan saat logout.");
+        });
+    });

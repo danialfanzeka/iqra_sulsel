@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iqra Sulsel - Baca Al-Qur'an</title>
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    #ayat-container .ayat {
+      margin-bottom: 16px;
+      padding: 12px;
+      border-left: 4px solid #4CAF50;
+      background: #f9f9f9;
+    }
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex; justify-content: center; align-items: center;
+    }
+    .popup-content {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .btn-selesai {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn-selesai:hover {
+      background-color: #45a049;
+    }
+    #timer {
+      margin-top: 10px;
+      font-style: italic;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header style="text-align: center; margin-bottom: 20px;">
+      <img src="assets/logo.png" alt="Logo Iqra Sulsel" style="max-width: 120px;" />
+    </header>
+    <h2>📖 Mulai Membaca Al-Qur'an</h2>
+
+    <select id="search-surah" placeholder="Cari surah..."></select>
+    <div id="ayat-container">
+      <!-- Ayat-ayat akan ditampilkan di sini -->
+    </div>
+
+    <div id="timer">Durasi: 0m 0s</div>
+
+    <button id="selesai-btn" class="btn-selesai">
+      ✅ Selesai Membaca
+    </button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+  <script type="module" src="js/baca.js"></script>
+
+  <script type="module">
+    import { auth } from "./js/firebase.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        alert("Anda belum login!");
+        window.location.href = "login.html"; // sesuaikan nama file login kamu
+      } else {
+        console.log("✅ Pengguna login:", user.email);
+        // kamu bisa simpan role di localStorage di sini jika belum
+      }
+    });
+  </script>
+</body>
+</html>

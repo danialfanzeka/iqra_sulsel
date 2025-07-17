@@ -1,0 +1,10 @@
+# Ignore node_modules (jika pakai NPM di masa depan)
+node_modules/
+
+# Firebase config lokal (kalau punya)
+firebase-debug.log
+
+# Mac/Windows/VS Code system files
+.DS_Store
+Thumbs.db
+.vscode/

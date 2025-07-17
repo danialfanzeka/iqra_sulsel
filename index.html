@@ -1,224 +1,45 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IqraSulsel</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        header {
-            background: #50b3a2;
-            color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #e8491d 3px solid;
-        }
-        header a {
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
-        header ul {
-            padding: 0;
-            list-style: none;
-        }
-        header li {
-            display: inline;
-            padding: 0 20px 0 20px;
-        }
-        .main-content {
-            padding: 20px;
-            background: #fff;
-            margin-top: 20px;
-        }
-        .login-form {
-            max-width: 300px;
-            margin: auto;
-        }
-        .login-form input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        .login-form button {
-            width: 100%;
-            padding: 10px;
-            background: #50b3a2;
-            color: #fff;
-            border: none;
-        }
-        .dashboard {
-            display: flex;
-        }
-        .sidebar {
-            width: 30%;
-            background: #50b3a2;
-            color: #fff;
-            padding: 20px;
-        }
-        .content {
-            width: 70%;
-            padding: 20px;
-        }
-        .surah-list {
-            list-style: none;
-            padding: 0;
-        }
-        .surah-list li {
-            padding: 10px;
-            background: #e8491d;
-            color: #fff;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-        .ayat {
-            background: #f4f4f4;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .logout-btn {
-            background: #e8491d;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iqra Sulsel - Login</title>
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="module" src="js/auth.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>IqraSulsel</h1>
-            <ul>
-                <li><a href="#" onclick="showLogin('siswa')">Login Siswa</a></li>
-                <li><a href="#" onclick="showLogin('guru')">Login Guru</a></li>
-            </ul>
-        </div>
-    </header>
+  <div class="container" style="max-width: 400px; text-align: center;">
+    <img src="assets/logo.png" alt="Logo Iqra Sulsel" style="max-width: 100px; margin-bottom: 10px;" />
+    <h1 style="margin-bottom: 20px;">Iqra Sulsel</h1>
 
-    <div class="container main-content" id="main-content">
-        <div id="login-siswa" class="login-form">
-            <h2>Login Siswa</h2>
-            <input type="text" id="siswa-username" placeholder="Username">
-            <input type="password" id="siswa-password" placeholder="Password">
-            <button onclick="login('siswa')">Login</button>
-        </div>
-        <div id="login-guru" class="login-form" style="display:none;">
-            <h2>Login Guru</h2>
-            <input type="text" id="guru-username" placeholder="Username">
-            <input type="password" id="guru-password" placeholder="Password">
-            <button onclick="login('guru')">Login</button>
-        </div>
-        <div id="dashboard-siswa" class="dashboard" style="display:none;">
-            <div class="sidebar">
-                <h2>Surah List</h2>
-                <ul class="surah-list">
-                    <li onclick="showAyat('Al-Fatihah')">Al-Fatihah</li>
-                    <li onclick="showAyat('Al-Ikhlas')">Al-Ikhlas</li>
-                    <li onclick="showAyat('Al-Falaq')">Al-Falaq</li>
-                    <li onclick="showAyat('An-Nas')">An-Nas</li>
-                </ul>
-                <button class="logout-btn" onclick="logout()">Logout</button>
-            </div>
-            <div class="content">
-                <h2>Dashboard Siswa</h2>
-                <div id="ayat-content"></div>
-            </div>
-        </div>
-        <div id="dashboard-guru" class="dashboard" style="display:none;">
-            <div class="sidebar">
-                <h2>Daftar Siswa</h2>
-                <ul class="surah-list">
-                    <li>Siswa 1</li>
-                    <li>Siswa 2</li>
-                    <li>Siswa 3</li>
-                </ul>
-                <button class="logout-btn" onclick="logout()">Logout</button>
-            </div>
-            <div class="content">
-                <h2>Dashboard Guru</h2>
-                <p>Progress siswa akan ditampilkan di sini.</p>
-            </div>
-        </div>
-    </div>
+    <form id="loginForm" style="display: flex; flex-direction: column; align-items: center;">
+      <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        required
+        style="width: 100%; max-width: 300px; margin-bottom: 10px;"
+      />
+      <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        required
+        style="width: 100%; max-width: 300px; margin-bottom: 10px;"
+      />
 
-    <script>
-        function showLogin(role) {
-            document.getElementById('login-siswa').style.display = role === 'siswa' ? 'block' : 'none';
-            document.getElementById('login-guru').style.display = role === 'guru' ? 'block' : 'none';
-        }
+      <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+        <label><input type="radio" name="role" value="siswa" checked /> Siswa</label>
+        <label><input type="radio" name="role" value="guru" /> Guru</label>
+      </div>
 
-        function login(role) {
-            var username = document.getElementById(role + '-username').value;
-            var password = document.getElementById(role + '-password').value;
-            if (username === role && password === '1234') {
-                document.getElementById('login-' + role).style.display = 'none';
-                document.getElementById('dashboard-' + role).style.display = 'flex';
-            } else {
-                alert('Username atau password salah!');
-            }
-        }
+      <button type="submit" class="button" style="width: 100%; max-width: 300px;">Masuk</button>
+    </form>
 
-        function logout() {
-            document.getElementById('dashboard-siswa').style.display = 'none';
-            document.getElementById('dashboard-guru').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-        }
-
-        function showAyat(surah) {
-            var ayatContent = document.getElementById('ayat-content');
-            ayatContent.innerHTML = '';
-            var ayatList = {
-                'Al-Fatihah': [
-                    'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
-                    'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
-                    'الرَّحْمَٰنِ الرَّحِيمِ',
-                    'مَالِكِ يَوْمِ الدِّينِ',
-                    'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
-                    'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
-                    'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ'
-                ],
-                'Al-Ikhlas': [
-                    'قُلْ هُوَ اللَّهُ أَحَدٌ',
-                    'اللَّهُ الصَّمَدُ',
-                    'لَمْ يَلِدْ وَلَمْ يُولَدْ',
-                    'وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ'
-                ],
-                'Al-Falaq': [
-                    'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ',
-                    'مِنْ شَرِّ مَا خَلَقَ',
-                    'وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ',
-                    'وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ',
-                    'وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ'
-                ],
-                'An-Nas': [
-                    'قُلْ أَعُوذُ بِرَبِّ النَّاسِ',
-                    'مَلِكِ النَّاسِ',
-                    'إِلَٰهِ النَّاسِ',
-                    'مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ',
-                    'الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ',
-                    'مِنَ الْجِنَّةِ وَالنَّاسِ'
-                ]
-            };
-            ayatList[surah].forEach(function(ayat) {
-                var ayatDiv = document.createElement('div');
-                ayatDiv.className = 'ayat';
-                ayatDiv.innerText = ayat;
-                ayatContent.appendChild(ayatDiv);
-            });
-        }
-    </script>
+    <p style="margin-top: 15px;">
+      Belum punya akun? <a href="register.html">Daftar di sini</a>
+    </p>
+  </div>
 </body>
 </html>

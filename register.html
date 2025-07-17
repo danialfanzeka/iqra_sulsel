@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iqra Sulsel - Registrasi</title>
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="module" src="js/register.js"></script>
+</head>
+<body>
+  <div class="container" style="max-width: 400px; text-align: center;">
+    <img src="assets/logo.png" alt="Logo Iqra Sulsel" style="max-width: 100px; margin-bottom: 10px;" />
+    <h1 style="margin-bottom: 20px;">Iqra Sulsel</h1>
+
+    <form id="registerForm" style="display: flex; flex-direction: column; align-items: center;">
+      <input
+        type="text"
+        id="name"
+        placeholder="Nama Lengkap"
+        required
+        style="width: 100%; max-width: 300px; margin-bottom: 10px;"
+      />
+      <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        required
+        style="width: 100%; max-width: 300px; margin-bottom: 10px;"
+      />
+      <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        required
+        style="width: 100%; max-width: 300px; margin-bottom: 10px;"
+      />
+
+      <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+        <label><input type="radio" name="role" value="siswa" checked /> Siswa</label>
+        <label><input type="radio" name="role" value="guru" /> Guru</label>
+      </div>
+
+      <button type="submit" class="button" style="width: 100%; max-width: 300px;">Daftar</button>
+    </form>
+
+    <p style="margin-top: 15px;">
+      Sudah punya akun? <a href="index.html">Masuk di sini</a>
+    </p>
+  </div>
+</body>
+</html>
